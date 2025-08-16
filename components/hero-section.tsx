@@ -51,7 +51,7 @@ export function HeroSection() {
               <div className="text-sm text-muted-foreground">Categories</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-primary">100+</div>
+              <div className="text-3xl font-bold text-primary">+</div>
               <div className="text-sm text-muted-foreground">Contributors</div>
             </div>
             <div className="text-center">
