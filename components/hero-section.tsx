@@ -27,9 +27,11 @@ export function HeroSection() {
           </div>
 
           {/* Main Heading */}
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight">
-            Discover the Ultimate
-            <span className="block text-transparent bg-gradient-to-r from-primary to-accent bg-clip-text">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+            <span className="block text-transparent bg-gradient-to-tr from-gray-200 to-gray-600 bg-clip-text">
+              Discover the Ultimate
+            </span>
+            <span className="block text-transparent bg-gradient-to-tr from-green-400 to-gray-600 bg-clip-text">
               OSINT Tools Collection
             </span>
           </h1>
