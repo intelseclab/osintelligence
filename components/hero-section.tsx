@@ -5,9 +5,21 @@ import { Badge } from "@/components/ui/badge"
 import { ArrowRight, Shield, Users, Star, Github } from "lucide-react"
 import Link from "next/link"
 import { useOSINTStore } from "@/lib/store"
+import { useEffect, useState } from "react"
 
 export function HeroSection() {
   const { tools, categories } = useOSINTStore()
+  const [contributors, setContributors] = useState(0)
+
+  useEffect(() => {
+    const fetchContributors = async () => {
+      const response = await fetch("https://api.github.com/repos/intelseclab/osintelligence/contributors")
+      const data = await response.json()
+      setContributors(data.length)
+    }
+
+    fetchContributors()
+  }, [])
 
   return (
     <section className="relative pt-24 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
@@ -53,7 +65,7 @@ export function HeroSection() {
               <div className="text-sm text-muted-foreground">Categories</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-primary">+</div>
+              <div className="text-3xl font-bold text-primary">{contributors}+</div>
               <div className="text-sm text-muted-foreground">Contributors</div>
             </div>
             <div className="text-center">
