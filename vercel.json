@@ -1,0 +1,7 @@
+{
+    "build": {
+      "env": {},
+      "cmd": "npm run sync-readme && next build"
+    }
+  }
+  
