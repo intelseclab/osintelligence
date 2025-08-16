@@ -1,0 +1,22 @@
+#!/bin/sh
+
+# Check for README.md changes and update public/README.md
+if git diff --cached --name-only | grep -q "^README\.md$"; then
+  echo "📄 README.md change detected, synchronizing public/README.md..."
+  
+  # Copy README.md into the public folder
+  node scripts/sync-readme.js
+  
+  if [ $? -eq 0 ]; then
+    echo "✅ README.md synchronized successfully"
+    
+    # Add public/README.md to stage
+    git add public/README.md
+    echo "📦 public/README.md added to commit"
+  else
+    echo "❌ README.md synchronization failed"
+    exit 1
+  fi
+fi
+
+exit 0
