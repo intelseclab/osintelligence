@@ -13,9 +13,21 @@ export function parseMarkdownToTools(markdownContent: string): ParsedMarkdownDat
 
   let currentCategory = ""
   let toolId = 1
+  let insideCodeBlock = false
 
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i].trim()
+
+    // Detect code block markers
+    if (line.startsWith("```")) {
+      insideCodeBlock = !insideCodeBlock
+      continue
+    }
+
+    // Skip processing content inside code blocks
+    if (insideCodeBlock) {
+      continue
+    }
 
     // Detect category headers (## Category Name)
     if (
@@ -61,6 +73,12 @@ export function parseMarkdownToTools(markdownContent: string): ParsedMarkdownDat
 
       // Count tools per category
       categoryMap.set(category, (categoryMap.get(category) || 0) + 1)
+
+      // Skip example.com URLs as they are likely examples
+      if (url.includes("example.com")) {
+        i = j - 1; // Skip the processed detail lines
+        continue;
+      }
 
       // Create tool object
       const tool: OSINTTool = {
