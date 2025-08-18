@@ -158,6 +158,13 @@ export const CATEGORY_CONFIGS: Record<string, CategoryConfig> = {
     icon: "🕵️",
     description: "Privacy protection, security tools, and anonymity resources",
     markdownHeader: "Privacy & Security Tools"
+  },
+  "financial-intelligence": {
+    id: "financial-intelligence",
+    name: "Financial Intelligence",
+    icon: "💰",
+    description: "Financial analysis, fraud detection, and economic research tools",
+    markdownHeader: "Financial Intelligence"
   }
 }
 

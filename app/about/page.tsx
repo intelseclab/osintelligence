@@ -132,6 +132,7 @@ export default function AboutPage() {
               { name: "Username Tracking", icon: "🔗" },
               { name: "Phone Research", icon: "📞" },
               { name: "Archive & History", icon: "🗄️" },
+              { name: "Financial Intelligence", icon: "💰" }
             ].map((category) => (
               <Badge
                 key={category.name}
