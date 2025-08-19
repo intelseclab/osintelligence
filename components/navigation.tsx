@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
@@ -14,6 +14,7 @@ export function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const { searchQuery, setSearchQuery, tools } = useOSINTStore()
   const pathname = usePathname()
+  const router = useRouter()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -35,6 +36,18 @@ export function Navigation() {
     { href: "/about", label: "About", icon: Info },
     { href: "/contribute", label: "Contribute", icon: Users },
   ]
+
+  const handleSearch = () => {
+    if (searchQuery.trim()) {
+      router.push(`/tools?search=${encodeURIComponent(searchQuery.trim())}`)
+    }
+  }
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      handleSearch()
+    }
+  }
 
   return (
     <nav
@@ -90,6 +103,7 @@ export function Navigation() {
                 placeholder="Search OSINT tools..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
+                onKeyDown={handleKeyDown}
                 className="pl-10 w-64 bg-card border-border focus:border-green-500"
               />
             </div>
@@ -123,6 +137,7 @@ export function Navigation() {
                   placeholder="Search tools..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
+                  onKeyDown={handleKeyDown}
                   className="pl-10 bg-card border-border"
                 />
               </div>
