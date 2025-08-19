@@ -4247,6 +4247,12 @@ N.B. any results for usernames are an approximation, as such, any negative resul
   - Tags: dark-web
   - Free: true
 
+- **Hudson Rock** - https://www.hudsonrock.com/threat-intelligence-cybercrime-tools
+  - Description: Infostealer Intelligence Toolkit
+  - Category: dark-web
+  - Tags: dark-web
+  - Free: true
+
 - **DeepSearch** - http://xjypo5vzgmo7jca6b322dnqbsdnp3amd24ybx26x5nxbusccjkm4pwid.onion.pet/
   - Description: No description
   - Category: dark-web
