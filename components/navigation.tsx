@@ -12,9 +12,15 @@ import { useOSINTStore } from "@/lib/store"
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [localSearchQuery, setLocalSearchQuery] = useState("")
   const { searchQuery, setSearchQuery, tools } = useOSINTStore()
   const pathname = usePathname()
   const router = useRouter()
+
+  // Sync local search query with global search query
+  useEffect(() => {
+    setLocalSearchQuery(searchQuery)
+  }, [searchQuery])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -38,8 +44,9 @@ export function Navigation() {
   ]
 
   const handleSearch = () => {
-    if (searchQuery.trim()) {
-      router.push(`/tools?search=${encodeURIComponent(searchQuery.trim())}`)
+    if (localSearchQuery.trim()) {
+      setSearchQuery(localSearchQuery.trim())
+      router.push(`/tools?search=${encodeURIComponent(localSearchQuery.trim())}`)
     }
   }
 
@@ -101,8 +108,8 @@ export function Navigation() {
               <Input
                 type="text"
                 placeholder="Search OSINT tools..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                value={localSearchQuery}
+                onChange={(e) => setLocalSearchQuery(e.target.value)}
                 onKeyDown={handleKeyDown}
                 className="pl-10 w-64 bg-card border-border focus:border-green-500"
               />
@@ -135,8 +142,8 @@ export function Navigation() {
                 <Input
                   type="text"
                   placeholder="Search tools..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
+                  value={localSearchQuery}
+                  onChange={(e) => setLocalSearchQuery(e.target.value)}
                   onKeyDown={handleKeyDown}
                   className="pl-10 bg-card border-border"
                 />
