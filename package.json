@@ -3,14 +3,12 @@
   "version": "0.1",
   "private": true,
   "scripts": {
-    "build": "npm run sync-readme && next build",
-    "dev": "npm run sync-readme && next dev",
+    "build": "next build",
+    "dev": "next dev",
     "lint": "next lint",
     "start": "next start",
     "sync-readme": "node scripts/sync-readme.js",
-    "watch-readme": "node scripts/watch-readme.js",
-    "prebuild": "npm run sync-readme",
-    "predev": "npm run sync-readme"
+    "watch-readme": "node scripts/watch-readme.js"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",    

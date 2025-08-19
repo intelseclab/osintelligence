@@ -6,14 +6,24 @@ export interface ParsedMarkdownData {
   categories: Category[]
 }
 
-export function parseMarkdownToTools(markdownContent: string): ParsedMarkdownData {
+export function parseMarkdownToTools(markdownContent: string, filename: string = ""): ParsedMarkdownData {
   const lines = markdownContent.split("\n")
   const tools: OSINTTool[] = []
   const categoryMap = new Map<string, number>()
 
   let currentCategory = ""
-  let toolId = 1
   let insideCodeBlock = false
+
+  // Simple hash function for URLs
+  function simpleHash(str: string): string {
+    let hash = 0
+    for (let i = 0; i < str.length; i++) {
+      const char = str.charCodeAt(i)
+      hash = ((hash << 5) - hash) + char
+      hash = hash & hash // Convert to 32-bit integer
+    }
+    return Math.abs(hash).toString(36)
+  }
 
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i].trim()
@@ -82,7 +92,7 @@ export function parseMarkdownToTools(markdownContent: string): ParsedMarkdownDat
 
       // Create tool object
       const tool: OSINTTool = {
-        id: `tool-${toolId++}`,
+        id: `${filename.replace('.md', '')}-${category}-${name.toLowerCase().replace(/[^a-z0-9]/g, '-')}-${simpleHash(url)}`,
         name,
         description,
         url,
@@ -118,25 +128,88 @@ export function parseMarkdownToTools(markdownContent: string): ParsedMarkdownDat
   return { tools, categories }
 }
 
-export async function loadToolsFromReadme(): Promise<ParsedMarkdownData> {
+export async function loadToolsFromFiles(): Promise<ParsedMarkdownData> {
   try {
-    console.log("[*] Attempting to fetch README.md...")
-    const response = await fetch("/README.md")
+    console.log("[*] Attempting to fetch tools from individual files...")
+    
+    // List of tool files to load
+    const toolFiles = [
+      "search-engines.md",
+      "social-media-intelligence.md", 
+      "domain-network-analysis.md",
+      "email-investigation.md",
+      "image-video-analysis.md",
+      "people-search.md",
+      "geolocation.md",
+      "dark-web.md",
+      "threat-intelligence.md",
+      "metadata-analysis.md",
+      "file-document-intelligence.md",
+      "code-repository-intelligence.md",
+      "username-handle-tracking.md",
+      "phone-number-research.md",
+      "archive-history-tools.md",
+      "company-organization-research.md",
+      "maritime-aviation-osint.md",
+      "visualization-analysis-tools.md",
+      "news-media-monitoring.md",
+      "data-statistics.md",
+      "privacy-security-tools.md",
+      "financial-intelligence.md"
+    ]
 
-    if (!response.ok) {
-      console.log("[*] README.md not found, status:", response.status)
-      throw new Error(`Failed to load README.md: ${response.status}`)
+    let allTools: OSINTTool[] = []
+    const categoryMap = new Map<string, number>()
+
+    // Load each tool file
+    for (const fileName of toolFiles) {
+      try {
+        const response = await fetch(`/tools/${fileName}`)
+        if (!response.ok) {
+          console.log(`[*] Skipping ${fileName}, status:`, response.status)
+          continue
+        }
+
+        const markdownContent = await response.text()
+        console.log(`[*] Loaded ${fileName}, content length:`, markdownContent.length)
+
+        // Parse the individual file
+        const fileResult = parseMarkdownToTools(markdownContent, fileName)
+        
+        // Merge tools and count categories
+        allTools = allTools.concat(fileResult.tools)
+        
+        // Update category counts
+        fileResult.tools.forEach(tool => {
+          categoryMap.set(tool.category, (categoryMap.get(tool.category) || 0) + 1)
+        })
+
+      } catch (error) {
+        console.error(`[*] Error loading ${fileName}:`, error)
+        continue
+      }
     }
 
-    const markdownContent = await response.text()
-    console.log("[*] README.md content length:", markdownContent.length)
+    console.log("[*] Total tools loaded:", allTools.length)
 
-    const result = parseMarkdownToTools(markdownContent)
-    console.log("[*] Parsed result:", result)
+    // Create categories array from the merged data
+    const categories: Category[] = Array.from(categoryMap.entries()).map(([categoryId, toolCount]) => {
+      const config = getCategoryConfig(categoryId)
+      return {
+        id: categoryId,
+        name: config.name,
+        description: config.description,
+        icon: config.icon,
+        toolCount,
+      }
+    })
+
+    const result = { tools: allTools, categories }
+    console.log("[*] Final parsed result:", result)
 
     return result
   } catch (error) {
-    console.error("[*] Error loading tools from README:", error)
+    console.error("[*] Error loading tools from files:", error)
 
     // Fallback to empty data
     return {
@@ -144,4 +217,9 @@ export async function loadToolsFromReadme(): Promise<ParsedMarkdownData> {
       categories: [],
     }
   }
+}
+
+// Keep the old function for backward compatibility
+export async function loadToolsFromReadme(): Promise<ParsedMarkdownData> {
+  return loadToolsFromFiles()
 }

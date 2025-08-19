@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { useSearchParams } from "next/navigation"
+import { useSearchParams, useRouter } from "next/navigation"
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
 import { Card, CardContent } from "@/components/ui/card"
@@ -9,14 +9,15 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { useOSINTStore } from "@/lib/store"
-import { useReadmeData } from "@/lib/use-readme-data"
+import { useToolsData } from "@/lib/use-tools-data"
 import { Search, ExternalLink, Grid, List, ChevronLeft, ChevronRight } from "lucide-react"
 
 const ITEMS_PER_PAGE = 50
 
 export default function ToolsPageClient() {
-  useReadmeData()
+  useToolsData()
   const searchParams = useSearchParams()
+  const router = useRouter()
 
   const [currentPage, setCurrentPage] = useState(1)
 
@@ -36,12 +37,51 @@ export default function ToolsPageClient() {
 
   const [showFilters, setShowFilters] = useState(false)
 
+  // Function to handle category change with URL update
+  const handleCategoryChange = (value: string) => {
+    const newCategory = value === "all" ? null : value
+    setSelectedCategory(newCategory)
+    
+    // Update URL
+    const params = new URLSearchParams(searchParams.toString())
+    if (newCategory) {
+      params.set("category", newCategory)
+    } else {
+      params.delete("category")
+    }
+    
+    const newUrl = params.toString() ? `/tools?${params.toString()}` : "/tools"
+    router.push(newUrl)
+  }
+
+  // Function to handle search query change with URL update
+  const handleSearchChange = (query: string) => {
+    setSearchQuery(query)
+    
+    // Update URL
+    const params = new URLSearchParams(searchParams.toString())
+    if (query.trim()) {
+      params.set("search", query.trim())
+    } else {
+      params.delete("search")
+    }
+    
+    const newUrl = params.toString() ? `/tools?${params.toString()}` : "/tools"
+    router.push(newUrl)
+  }
+
   useEffect(() => {
     const categoryParam = searchParams.get("category")
+    const searchParam = searchParams.get("search")
+    
     if (categoryParam && categoryParam !== selectedCategory) {
       setSelectedCategory(categoryParam)
     }
-  }, [searchParams, selectedCategory, setSelectedCategory])
+    
+    if (searchParam && searchParam !== searchQuery) {
+      setSearchQuery(searchParam)
+    }
+  }, [searchParams, selectedCategory, setSelectedCategory, searchQuery, setSearchQuery])
 
   useEffect(() => {
     setCurrentPage(1)
@@ -119,6 +159,12 @@ export default function ToolsPageClient() {
                   placeholder="Search tools, descriptions, or tags..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      handleSearchChange(e.currentTarget.value)
+                    }
+                  }}
+                  onBlur={(e) => handleSearchChange(e.target.value)}
                   className="pl-10 bg-background/50"
                 />
               </div>
@@ -126,7 +172,7 @@ export default function ToolsPageClient() {
               {/* Category Filter */}
               <Select
                 value={selectedCategory || "all"}
-                onValueChange={(value) => setSelectedCategory(value === "all" ? null : value)}
+                onValueChange={handleCategoryChange}
               >
                 <SelectTrigger className="w-full lg:w-48 bg-background/50">
                   <SelectValue placeholder="All Categories" />
@@ -194,6 +240,7 @@ export default function ToolsPageClient() {
               onClick={() => {
                 setSelectedCategory(null)
                 setSearchQuery("")
+                router.push("/tools")
               }}
               className="text-green-400 border-green-500/20"
             >
@@ -212,6 +259,7 @@ export default function ToolsPageClient() {
                 onClick={() => {
                   setSelectedCategory(null)
                   setSearchQuery("")
+                  router.push("/tools")
                 }}
                 className="text-green-400 border-green-500/20"
               >

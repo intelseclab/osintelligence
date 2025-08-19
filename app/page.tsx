@@ -5,10 +5,10 @@ import { HeroSection } from "@/components/hero-section"
 import { CategoriesSection } from "@/components/categories-section"
 import { ContributeSection } from "@/components/contribute-section"
 import { Footer } from "@/components/footer"
-import { useReadmeData } from "@/lib/use-readme-data"
+import { useToolsData } from "@/lib/use-tools-data"
 
 export default function HomePage() {
-  useReadmeData()
+  useToolsData()
 
   return (
     <div className="min-h-screen bg-background">

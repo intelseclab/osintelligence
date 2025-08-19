@@ -7,7 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { useOSINTStore } from "@/lib/store"
-import { useReadmeData } from "@/lib/use-readme-data"
+import { useToolsData } from "@/lib/use-tools-data"
 import { ExternalLink, ArrowLeft } from "lucide-react"
 import Link from "next/link"
 
@@ -15,7 +15,7 @@ export default function CategoryPage() {
   const params = useParams()
   const slug = params.slug as string
 
-  useReadmeData()
+  useToolsData()
 
   const { tools, categories, isLoading } = useOSINTStore()
 
