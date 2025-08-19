@@ -77,9 +77,11 @@ export function HeroSection() {
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Button size="lg" className="glow-effect group">
+              <Link href="/tools" className="flex items-center">
               <Shield className="h-5 w-5 mr-2 group-hover:rotate-12 transition-transform" />
               Explore Tools
               <ArrowRight className="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" />
+              </Link>
             </Button>
             <Button variant="outline" size="lg" asChild>
               <Link href="https://github.com/intelseclab/osintelligence" target="_blank" rel="noopener noreferrer">
