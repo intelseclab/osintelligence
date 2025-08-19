@@ -79,8 +79,7 @@ This policy does not cover:
 
 For security-related questions or concerns:
 - Email: security@osintelligence.net
-- GitHub: @osint-security-team
-- Matrix: #osint-security:matrix.org
+- GitHub: @intelseclab
 
 ---
 
