@@ -118,6 +118,7 @@ export default function RootLayout({
             }),
           }}
         />
+        <meta name="yandex-verification" content="a94a2727a4490fd2" />
       </head>
       <body className={`${dmSans.variable} font-sans antialiased`}>
         <div className="matrix-bg">
