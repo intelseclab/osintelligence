@@ -1,25 +1,27 @@
-"use client"
+"use client";
 
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { ArrowRight, Shield, Users, Star, Github } from "lucide-react"
-import Link from "next/link"
-import { useOSINTStore } from "@/lib/store"
-import { useEffect, useState } from "react"
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { ArrowRight, Shield, Users, Star, Github } from "lucide-react";
+import Link from "next/link";
+import { useOSINTStore } from "@/lib/store";
+import { useEffect, useState } from "react";
 
 export function HeroSection() {
-  const { tools, categories } = useOSINTStore()
-  const [contributors, setContributors] = useState(0)
+  const { tools, categories } = useOSINTStore();
+  const [contributors, setContributors] = useState(0);
 
   useEffect(() => {
     const fetchContributors = async () => {
-      const response = await fetch("https://api.github.com/repos/intelseclab/osintelligence/contributors")
-      const data = await response.json()
-      setContributors(data.length)
-    }
+      const response = await fetch(
+        "https://api.github.com/repos/intelseclab/osintelligence/contributors"
+      );
+      const data = await response.json();
+      setContributors(data.length);
+    };
 
-    fetchContributors()
-  }, [])
+    fetchContributors();
+  }, []);
 
   return (
     <section className="relative pt-24 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
@@ -32,8 +34,11 @@ export function HeroSection() {
         <div className="text-center">
           {/* Hero Badge */}
           <div className="flex justify-center mb-8">
-            <Badge variant="secondary" className="px-4 py-2 text-sm font-medium">
-              <Shield className="h-4 w-4 mr-2" />
+            <Badge
+              variant="secondary"
+              className="px-4 py-2 text-sm font-medium"
+            >
+              <Shield className="shrink-0 !size-4 me-2" />
               Community-Driven OSINT Directory
             </Badge>
           </div>
@@ -50,22 +55,29 @@ export function HeroSection() {
 
           {/* Subtitle */}
           <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
-            Explore the most comprehensive directory of Open Source Intelligence tools, curated and maintained by the
-            cybersecurity community through GitHub contributions.
+            Explore the most comprehensive directory of Open Source Intelligence
+            tools, curated and maintained by the cybersecurity community through
+            GitHub contributions.
           </p>
 
           {/* Stats */}
           <div className="flex flex-wrap justify-center gap-8 mb-12">
             <div className="text-center">
-              <div className="text-3xl font-bold text-primary">{tools.length}+</div>
+              <div className="text-3xl font-bold text-primary">
+                {tools.length}+
+              </div>
               <div className="text-sm text-muted-foreground">OSINT Tools</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-accent">{categories.length}</div>
+              <div className="text-3xl font-bold text-accent">
+                {categories.length}
+              </div>
               <div className="text-sm text-muted-foreground">Categories</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-primary">{contributors}+</div>
+              <div className="text-3xl font-bold text-primary">
+                {contributors}+
+              </div>
               <div className="text-sm text-muted-foreground">Contributors</div>
             </div>
             <div className="text-center">
@@ -78,13 +90,17 @@ export function HeroSection() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Button size="lg" className="glow-effect group">
               <Link href="/tools" className="flex items-center">
-              <Shield className="h-5 w-5 mr-2 group-hover:rotate-12 transition-transform" />
-              Explore Tools
-              <ArrowRight className="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                <Shield className="h-5 w-5 mr-2 group-hover:rotate-12 transition-transform" />
+                Explore Tools
+                <ArrowRight className="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" />
               </Link>
             </Button>
             <Button variant="outline" size="lg" asChild>
-              <Link href="https://github.com/intelseclab/osintelligence" target="_blank" rel="noopener noreferrer">
+              <Link
+                href="https://github.com/intelseclab/osintelligence"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <Github className="h-5 w-5 mr-2" />
                 Contribute on GitHub
               </Link>
@@ -109,5 +125,5 @@ export function HeroSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }
