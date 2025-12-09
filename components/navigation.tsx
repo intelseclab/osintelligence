@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
@@ -12,8 +12,15 @@ import { useOSINTStore } from "@/lib/store"
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [localSearchQuery, setLocalSearchQuery] = useState("")
   const { searchQuery, setSearchQuery, tools } = useOSINTStore()
   const pathname = usePathname()
+  const router = useRouter()
+
+  // Sync local search query with global search query
+  useEffect(() => {
+    setLocalSearchQuery(searchQuery)
+  }, [searchQuery])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -35,6 +42,19 @@ export function Navigation() {
     { href: "/about", label: "About", icon: Info },
     { href: "/contribute", label: "Contribute", icon: Users },
   ]
+
+  const handleSearch = () => {
+    if (localSearchQuery.trim()) {
+      setSearchQuery(localSearchQuery.trim())
+      router.push(`/tools?search=${encodeURIComponent(localSearchQuery.trim())}`)
+    }
+  }
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      handleSearch()
+    }
+  }
 
   return (
     <nav
@@ -88,8 +108,9 @@ export function Navigation() {
               <Input
                 type="text"
                 placeholder="Search OSINT tools..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                value={localSearchQuery}
+                onChange={(e) => setLocalSearchQuery(e.target.value)}
+                onKeyDown={handleKeyDown}
                 className="pl-10 w-64 bg-card border-border focus:border-green-500"
               />
             </div>
@@ -121,8 +142,9 @@ export function Navigation() {
                 <Input
                   type="text"
                   placeholder="Search tools..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
+                  value={localSearchQuery}
+                  onChange={(e) => setLocalSearchQuery(e.target.value)}
+                  onKeyDown={handleKeyDown}
                   className="pl-10 bg-card border-border"
                 />
               </div>

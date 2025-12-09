@@ -110,6 +110,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 If you find this repository useful, please consider giving it a star!
 
+[![Star History Chart](https://api.star-history.com/svg?repos=intelseclab/osintelligence&type=Date)](https://www.star-history.com/#intelseclab/osintelligence&Date)
+
 ---
 
 **Disclaimer**: This collection is for educational and legitimate research purposes only. Users are responsible for ensuring their activities comply with applicable laws and regulations.

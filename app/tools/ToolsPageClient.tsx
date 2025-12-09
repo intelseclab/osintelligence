@@ -20,6 +20,7 @@ export default function ToolsPageClient() {
   const router = useRouter()
 
   const [currentPage, setCurrentPage] = useState(1)
+  const [localSearchQuery, setLocalSearchQuery] = useState("")
 
   const {
     filteredTools,
@@ -36,6 +37,11 @@ export default function ToolsPageClient() {
   } = useOSINTStore()
 
   const [showFilters, setShowFilters] = useState(false)
+
+  // Sync local search query with global search query
+  useEffect(() => {
+    setLocalSearchQuery(searchQuery)
+  }, [searchQuery])
 
   // Function to handle category change with URL update
   const handleCategoryChange = (value: string) => {
@@ -74,14 +80,20 @@ export default function ToolsPageClient() {
     const categoryParam = searchParams.get("category")
     const searchParam = searchParams.get("search")
     
+    // Only update if the URL params are different from current store state
+    // and if they actually exist (not empty strings)
     if (categoryParam && categoryParam !== selectedCategory) {
       setSelectedCategory(categoryParam)
+    } else if (!categoryParam && selectedCategory) {
+      setSelectedCategory(null)
     }
     
-    if (searchParam && searchParam !== searchQuery) {
+    if (searchParam !== null && searchParam !== searchQuery) {
       setSearchQuery(searchParam)
+    } else if (searchParam === null && searchQuery) {
+      setSearchQuery("")
     }
-  }, [searchParams, selectedCategory, setSelectedCategory, searchQuery, setSearchQuery])
+  }, [searchParams, setSelectedCategory, setSearchQuery])
 
   useEffect(() => {
     setCurrentPage(1)
@@ -157,14 +169,26 @@ export default function ToolsPageClient() {
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
                 <Input
                   placeholder="Search tools, descriptions, or tags..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
+                  value={localSearchQuery}
+                  onChange={(e) => {
+                    const value = e.target.value
+                    setLocalSearchQuery(value)
+                    // Clear search filter immediately when input is empty
+                    if (!value.trim()) {
+                      setSearchQuery("")
+                      // Update URL to remove search parameter
+                      const params = new URLSearchParams(searchParams.toString())
+                      params.delete("search")
+                      const newUrl = params.toString() ? `/tools?${params.toString()}` : "/tools"
+                      router.push(newUrl)
+                    }
+                  }}
                   onKeyDown={(e) => {
                     if (e.key === "Enter") {
                       handleSearchChange(e.currentTarget.value)
                     }
                   }}
-                  onBlur={(e) => handleSearchChange(e.target.value)}
+                  onBlur={() => handleSearchChange(localSearchQuery)}
                   className="pl-10 bg-background/50"
                 />
               </div>
