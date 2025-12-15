@@ -21,7 +21,7 @@ export function HeroSection() {
     };
 
     fetchContributors();
-  }, []);
+  }, [contributors]);
 
   return (
     <section className="relative pt-24 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
