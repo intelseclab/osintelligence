@@ -7,9 +7,10 @@ export default function ToolsPage() {
 
 export async function generateMetadata({
   searchParams,
-}: { searchParams: { category?: string; search?: string } }): Promise<Metadata> {
-  const category = searchParams.category
-  const search = searchParams.search
+}: { searchParams: Promise<{ category?: string; search?: string }> }): Promise<Metadata> {
+  const params = await searchParams
+  const category = params.category
+  const search = params.search
 
   let title = "OSINT Tools Directory"
   let description = "Browse our comprehensive collection of 500+ OSINT tools for cybersecurity professionals"

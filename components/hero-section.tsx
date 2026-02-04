@@ -12,16 +12,45 @@ export function HeroSection() {
   const [contributors, setContributors] = useState(0);
 
   useEffect(() => {
+    const CACHE_KEY = "github-contributors-count";
+    const CACHE_TTL = 1000 * 60 * 60 * 24; // 24 hours
+
     const fetchContributors = async () => {
-      const response = await fetch(
-        "https://api.github.com/repos/intelseclab/osintelligence/contributors"
-      );
-      const data = await response.json();
-      setContributors(data.length);
+      // Check cache first
+      const cached = localStorage.getItem(CACHE_KEY);
+      if (cached) {
+        try {
+          const { count, timestamp } = JSON.parse(cached);
+          if (Date.now() - timestamp < CACHE_TTL) {
+            setContributors(count);
+            return;
+          }
+        } catch {
+          // Invalid cache, continue to fetch
+        }
+      }
+
+      try {
+        const response = await fetch(
+          "https://api.github.com/repos/intelseclab/osintelligence/contributors"
+        );
+        if (!response.ok) throw new Error("Failed to fetch");
+        const data = await response.json();
+        const count = Array.isArray(data) ? data.length : 0;
+        setContributors(count);
+
+        // Cache the result
+        localStorage.setItem(
+          CACHE_KEY,
+          JSON.stringify({ count, timestamp: Date.now() })
+        );
+      } catch {
+        setContributors(0); // Fallback on error
+      }
     };
 
     fetchContributors();
-  }, [contributors]);
+  }, []); // Empty dependency array - run once on mount
 
   return (
     <section className="relative pt-24 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden">

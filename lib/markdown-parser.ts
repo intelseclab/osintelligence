@@ -98,13 +98,13 @@ export function parseMarkdownToTools(markdownContent: string, filename: string =
         url,
         category,
         tags,
-        featured: Math.random() > 0.8, // Randomly mark some as featured
+        featured: false,
         verified: true,
         addedBy: "admin",
         addedDate: new Date().toISOString(),
         lastUpdated: new Date().toISOString(),
-        rating: Math.floor(Math.random() * 2) + 4, // Random rating between 4-5
-        usageCount: Math.floor(Math.random() * 1000),
+        rating: 0,
+        usageCount: 0,
       }
 
       tools.push(tool)
@@ -130,7 +130,6 @@ export function parseMarkdownToTools(markdownContent: string, filename: string =
 
 export async function loadToolsFromFiles(): Promise<ParsedMarkdownData> {
   try {
-    console.log("[*] Attempting to fetch tools from individual files...")
     
     // List of tool files to load
     const toolFiles = [
@@ -166,12 +165,10 @@ export async function loadToolsFromFiles(): Promise<ParsedMarkdownData> {
       try {
         const response = await fetch(`/tools/${fileName}`)
         if (!response.ok) {
-          console.log(`[*] Skipping ${fileName}, status:`, response.status)
           continue
         }
 
         const markdownContent = await response.text()
-        console.log(`[*] Loaded ${fileName}, content length:`, markdownContent.length)
 
         // Parse the individual file
         const fileResult = parseMarkdownToTools(markdownContent, fileName)
@@ -184,13 +181,10 @@ export async function loadToolsFromFiles(): Promise<ParsedMarkdownData> {
           categoryMap.set(tool.category, (categoryMap.get(tool.category) || 0) + 1)
         })
 
-      } catch (error) {
-        console.error(`[*] Error loading ${fileName}:`, error)
+      } catch {
         continue
       }
     }
-
-    console.log("[*] Total tools loaded:", allTools.length)
 
     // Create categories array from the merged data
     const categories: Category[] = Array.from(categoryMap.entries()).map(([categoryId, toolCount]) => {
@@ -204,13 +198,8 @@ export async function loadToolsFromFiles(): Promise<ParsedMarkdownData> {
       }
     })
 
-    const result = { tools: allTools, categories }
-    console.log("[*] Final parsed result:", result)
-
-    return result
-  } catch (error) {
-    console.error("[*] Error loading tools from files:", error)
-
+    return { tools: allTools, categories }
+  } catch {
     // Fallback to empty data
     return {
       tools: [],

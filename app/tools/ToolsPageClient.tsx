@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useDeferredValue, useCallback, useRef } from "react"
 import { useSearchParams, useRouter } from "next/navigation"
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { useOSINTStore } from "@/lib/store"
 import { useToolsData } from "@/lib/use-tools-data"
+import { sanitizeInput } from "@/lib/utils"
 import { Search, ExternalLink, Grid, List, ChevronLeft, ChevronRight } from "lucide-react"
 
 const ITEMS_PER_PAGE = 50
@@ -21,6 +22,7 @@ export default function ToolsPageClient() {
 
   const [currentPage, setCurrentPage] = useState(1)
   const [localSearchQuery, setLocalSearchQuery] = useState("")
+  const deferredSearchQuery = useDeferredValue(localSearchQuery)
 
   const {
     filteredTools,
@@ -44,10 +46,10 @@ export default function ToolsPageClient() {
   }, [searchQuery])
 
   // Function to handle category change with URL update
-  const handleCategoryChange = (value: string) => {
+  const handleCategoryChange = useCallback((value: string) => {
     const newCategory = value === "all" ? null : value
     setSelectedCategory(newCategory)
-    
+
     // Update URL
     const params = new URLSearchParams(searchParams.toString())
     if (newCategory) {
@@ -55,42 +57,48 @@ export default function ToolsPageClient() {
     } else {
       params.delete("category")
     }
-    
+
     const newUrl = params.toString() ? `/tools?${params.toString()}` : "/tools"
     router.push(newUrl)
-  }
+  }, [searchParams, setSelectedCategory, router])
 
   // Function to handle search query change with URL update
-  const handleSearchChange = (query: string) => {
-    setSearchQuery(query)
-    
+  const handleSearchChange = useCallback((query: string) => {
+    const sanitized = sanitizeInput(query)
+    setSearchQuery(sanitized)
+
     // Update URL
     const params = new URLSearchParams(searchParams.toString())
-    if (query.trim()) {
-      params.set("search", query.trim())
+    if (sanitized.trim()) {
+      params.set("search", sanitized.trim())
     } else {
       params.delete("search")
     }
-    
+
     const newUrl = params.toString() ? `/tools?${params.toString()}` : "/tools"
     router.push(newUrl)
-  }
+  }, [searchParams, setSearchQuery, router])
+
+  // Use refs to track current values without triggering re-renders
+  const selectedCategoryRef = useRef(selectedCategory)
+  const searchQueryRef = useRef(searchQuery)
+  selectedCategoryRef.current = selectedCategory
+  searchQueryRef.current = searchQuery
 
   useEffect(() => {
     const categoryParam = searchParams.get("category")
     const searchParam = searchParams.get("search")
-    
+
     // Only update if the URL params are different from current store state
-    // and if they actually exist (not empty strings)
-    if (categoryParam && categoryParam !== selectedCategory) {
+    if (categoryParam && categoryParam !== selectedCategoryRef.current) {
       setSelectedCategory(categoryParam)
-    } else if (!categoryParam && selectedCategory) {
+    } else if (!categoryParam && selectedCategoryRef.current) {
       setSelectedCategory(null)
     }
-    
-    if (searchParam !== null && searchParam !== searchQuery) {
-      setSearchQuery(searchParam)
-    } else if (searchParam === null && searchQuery) {
+
+    if (searchParam !== null && searchParam !== searchQueryRef.current) {
+      setSearchQuery(sanitizeInput(searchParam))
+    } else if (searchParam === null && searchQueryRef.current) {
       setSearchQuery("")
     }
   }, [searchParams, setSelectedCategory, setSearchQuery])
@@ -254,7 +262,7 @@ export default function ToolsPageClient() {
             {selectedCategory && selectedCategory !== "all" && (
               <span> in {categories.find((c) => c.id === selectedCategory)?.name}</span>
             )}
-            {searchQuery && <span> matching "{searchQuery}"</span>}
+            {searchQuery && <span> matching &quot;{searchQuery}&quot;</span>}
           </p>
 
           {(selectedCategory || searchQuery) && (

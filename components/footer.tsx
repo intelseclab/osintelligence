@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link"
 import { Github, Twitter, Mail, Heart } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
@@ -51,9 +52,9 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <a href="/" className="text-muted-foreground hover:text-primary transition-colors">
+                <Link href="/" className="text-muted-foreground hover:text-primary transition-colors">
                   Categories
-                </a>
+                </Link>
               </li>
               <li>
                 <a href="/contribute" className="text-muted-foreground hover:text-primary transition-colors">

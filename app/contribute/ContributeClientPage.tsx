@@ -17,7 +17,7 @@ export default function ContributeClientPage() {
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-foreground mb-4">Contribute to OSINT Directory</h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Help grow the world's most comprehensive OSINT tools directory. Your contributions make this resource better
+            Help grow the world&apos;s most comprehensive OSINT tools directory. Your contributions make this resource better
             for everyone.
           </p>
         </div>
@@ -133,7 +133,7 @@ export default function ContributeClientPage() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-green-400">
                 <CheckCircle className="h-5 w-5" />
-                Do's
+                Dos
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -153,7 +153,7 @@ export default function ContributeClientPage() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-red-400">
                 <AlertCircle className="h-5 w-5" />
-                Don'ts
+                Don&apos;ts
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -161,7 +161,7 @@ export default function ContributeClientPage() {
                 <li>❌ Submit malicious or illegal tools</li>
                 <li>❌ Add broken or dead links</li>
                 <li>❌ Use promotional language</li>
-                <li>❌ Submit tools you haven't tested</li>
+                <li>❌ Submit tools you haven&apos;t tested</li>
                 <li>❌ Ignore the format requirements</li>
                 <li>❌ Add duplicate entries</li>
                 <li>❌ Submit without proper research</li>
