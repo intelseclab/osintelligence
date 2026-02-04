@@ -39,7 +39,6 @@ export default function ToolDetailClient({ toolId }: ToolDetailClientProps) {
     getToolById,
     toggleFavorite,
     isFavorite,
-    addToRecentlyViewed,
     incrementToolView,
     addToComparison,
     isInComparison,
@@ -53,7 +52,6 @@ export default function ToolDetailClient({ toolId }: ToolDetailClientProps) {
     const foundTool = getToolById(toolId)
     if (foundTool) {
       setTool(foundTool)
-      addToRecentlyViewed(toolId)
       incrementToolView(toolId)
 
       // Find related tools (same category, excluding current)
@@ -62,7 +60,7 @@ export default function ToolDetailClient({ toolId }: ToolDetailClientProps) {
         .slice(0, 4)
       setRelatedTools(related)
     }
-  }, [toolId, tools, getToolById, addToRecentlyViewed, incrementToolView])
+  }, [toolId, tools, getToolById, incrementToolView])
 
   const handleCopyUrl = async () => {
     if (tool) {

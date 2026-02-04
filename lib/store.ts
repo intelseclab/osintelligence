@@ -32,11 +32,6 @@ export interface UserRating {
   timestamp: number
 }
 
-export interface RecentlyViewed {
-  toolId: string
-  timestamp: number
-}
-
 interface OSINTStore {
   // Tools state
   tools: OSINTTool[]
@@ -57,7 +52,6 @@ interface OSINTStore {
 
   // User data (persisted)
   favorites: string[]
-  recentlyViewed: RecentlyViewed[]
   userRatings: UserRating[]
   toolViews: Record<string, number>
   comparisonList: string[]
@@ -122,7 +116,6 @@ export const useOSINTStore = create<OSINTStore>()(
 
         // User data
         favorites: [],
-        recentlyViewed: [],
         userRatings: [],
         toolViews: {},
         comparisonList: [],
@@ -293,7 +286,6 @@ export const useOSINTStore = create<OSINTStore>()(
         name: "osint-user-data",
         partialize: (state) => ({
           favorites: state.favorites,
-          recentlyViewed: state.recentlyViewed,
           userRatings: state.userRatings,
           toolViews: state.toolViews,
           viewMode: state.viewMode,
