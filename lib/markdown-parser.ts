@@ -6,10 +6,13 @@ export interface ParsedMarkdownData {
   categories: Category[]
 }
 
+let globalToolCounter = 0
+
 export function parseMarkdownToTools(markdownContent: string, filename: string = ""): ParsedMarkdownData {
   const lines = markdownContent.split("\n")
   const tools: OSINTTool[] = []
   const categoryMap = new Map<string, number>()
+  const usedIds = new Set<string>()
 
   let currentCategory = ""
   let insideCodeBlock = false
@@ -23,6 +26,18 @@ export function parseMarkdownToTools(markdownContent: string, filename: string =
       hash = hash & hash // Convert to 32-bit integer
     }
     return Math.abs(hash).toString(36)
+  }
+
+  // Generate unique ID
+  function generateUniqueId(base: string): string {
+    let id = base
+    let counter = 0
+    while (usedIds.has(id)) {
+      counter++
+      id = `${base}-${counter}`
+    }
+    usedIds.add(id)
+    return id
   }
 
   for (let i = 0; i < lines.length; i++) {
@@ -90,9 +105,11 @@ export function parseMarkdownToTools(markdownContent: string, filename: string =
         continue;
       }
 
-      // Create tool object
+      // Create tool object with unique ID
+      globalToolCounter++
+      const baseId = `${filename.replace('.md', '')}-${category}-${simpleHash(url)}`
       const tool: OSINTTool = {
-        id: `${filename.replace('.md', '')}-${category}-${name.toLowerCase().replace(/[^a-z0-9]/g, '-')}-${simpleHash(url)}`,
+        id: generateUniqueId(baseId),
         name,
         description,
         url,

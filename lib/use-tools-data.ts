@@ -4,7 +4,7 @@ import { useEffect } from "react"
 import { useOSINTStore, type OSINTTool, type Category } from "./store"
 import { loadToolsFromFiles } from "./markdown-parser"
 
-const CACHE_KEY = "osint-tools-cache"
+const CACHE_KEY = "osint-tools-cache-v2"
 const CACHE_TTL = 1000 * 60 * 60 // 1 hour
 
 interface CachedData {
@@ -48,11 +48,12 @@ function setCachedData(tools: OSINTTool[], categories: Category[]): void {
 }
 
 export function useToolsData() {
-  const { setTools, setCategories, setIsLoading, filterTools } = useOSINTStore()
+  const { setTools, setCategories, setIsLoading, setError, filterTools } = useOSINTStore()
 
   useEffect(() => {
     async function loadData() {
       setIsLoading(true)
+      setError(false)
 
       try {
         // Check cache first
@@ -67,19 +68,26 @@ export function useToolsData() {
 
         // Load fresh data
         const { tools, categories } = await loadToolsFromFiles()
+
+        if (tools.length === 0) {
+          setError(true, "No tools found. Please try again later.")
+        }
+
         setTools(tools)
         setCategories(categories)
         filterTools()
 
         // Cache the result
-        setCachedData(tools, categories)
-      } catch {
-        // Silently fail, UI will show empty state
+        if (tools.length > 0) {
+          setCachedData(tools, categories)
+        }
+      } catch (err) {
+        setError(true, "Failed to load tools. Please check your connection and try again.")
       } finally {
         setIsLoading(false)
       }
     }
 
     loadData()
-  }, [setTools, setCategories, setIsLoading, filterTools])
+  }, [setTools, setCategories, setIsLoading, setError, filterTools])
 }

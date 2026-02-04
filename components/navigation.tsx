@@ -4,23 +4,17 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
-import { Search, Github, Menu, X, Shield, Home, Info, Users, Wrench } from "lucide-react"
+import { SearchAutocomplete } from "@/components/search-autocomplete"
+import { Github, Menu, X, Shield, Home, Info, Users, Wrench, Heart } from "lucide-react"
 import { useOSINTStore } from "@/lib/store"
 
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const [localSearchQuery, setLocalSearchQuery] = useState("")
-  const { searchQuery, setSearchQuery, tools } = useOSINTStore()
+  const { tools, favorites } = useOSINTStore()
   const pathname = usePathname()
   const router = useRouter()
-
-  // Sync local search query with global search query
-  useEffect(() => {
-    setLocalSearchQuery(searchQuery)
-  }, [searchQuery])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -39,22 +33,10 @@ export function Navigation() {
   const navigationItems = [
     { href: "/", label: "Home", icon: Home },
     { href: "/tools", label: "Tools", icon: Wrench },
+    { href: "/favorites", label: "Favorites", icon: Heart, badge: favorites.length > 0 ? favorites.length : undefined },
     { href: "/about", label: "About", icon: Info },
     { href: "/contribute", label: "Contribute", icon: Users },
   ]
-
-  const handleSearch = () => {
-    if (localSearchQuery.trim()) {
-      setSearchQuery(localSearchQuery.trim())
-      router.push(`/tools?search=${encodeURIComponent(localSearchQuery.trim())}`)
-    }
-  }
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      handleSearch()
-    }
-  }
 
   return (
     <nav
@@ -77,7 +59,7 @@ export function Navigation() {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-6">
             {navigationItems.map((item) => {
               const Icon = item.icon
               const isActive = isActiveLink(item.href)
@@ -89,31 +71,27 @@ export function Navigation() {
                     isActive ? "text-green-400 font-medium" : "text-foreground hover:text-green-400"
                   }`}
                 >
-                  <Icon className="h-4 w-4" />
+                  <Icon className={`h-4 w-4 ${item.label === "Favorites" && favorites.length > 0 ? "text-red-400" : ""}`} />
                   <span>{item.label}</span>
+                  {item.badge && (
+                    <Badge variant="secondary" className="text-xs ml-1 h-5 w-5 p-0 flex items-center justify-center rounded-full bg-red-500/20 text-red-400">
+                      {item.badge}
+                    </Badge>
+                  )}
                 </Link>
               )
             })}
-            <div className="flex items-center space-x-2">
-              <Badge variant="secondary" className="text-xs">
-                {tools.length} Tools
-              </Badge>
-            </div>
+            <Badge variant="secondary" className="text-xs">
+              {tools.length} Tools
+            </Badge>
           </div>
 
           {/* Search Bar */}
           <div className="hidden md:flex items-center space-x-4">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-              <Input
-                type="text"
-                placeholder="Search OSINT tools..."
-                value={localSearchQuery}
-                onChange={(e) => setLocalSearchQuery(e.target.value)}
-                onKeyDown={handleKeyDown}
-                className="pl-10 w-64 bg-card border-border focus:border-green-500"
-              />
-            </div>
+            <SearchAutocomplete
+              placeholder="Search OSINT tools..."
+              className="w-72"
+            />
             <Button variant="outline" size="sm" asChild>
               <Link href="https://github.com/intelseclab/osintelligence" target="_blank" rel="noopener noreferrer">
                 <Github className="h-4 w-4 mr-2" />
@@ -137,16 +115,8 @@ export function Navigation() {
         {isMobileMenuOpen && (
           <div className="md:hidden border-t border-border bg-background/95 backdrop-blur-md">
             <div className="px-2 pt-2 pb-3 space-y-1">
-              <div className="relative mb-3">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                <Input
-                  type="text"
-                  placeholder="Search tools..."
-                  value={localSearchQuery}
-                  onChange={(e) => setLocalSearchQuery(e.target.value)}
-                  onKeyDown={handleKeyDown}
-                  className="pl-10 bg-card border-border"
-                />
+              <div className="mb-3 px-2">
+                <SearchAutocomplete placeholder="Search tools..." />
               </div>
               {navigationItems.map((item) => {
                 const Icon = item.icon
@@ -160,8 +130,13 @@ export function Navigation() {
                     }`}
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
-                    <Icon className="h-4 w-4" />
+                    <Icon className={`h-4 w-4 ${item.label === "Favorites" && favorites.length > 0 ? "text-red-400" : ""}`} />
                     <span>{item.label}</span>
+                    {item.badge && (
+                      <Badge variant="secondary" className="text-xs ml-1 bg-red-500/20 text-red-400">
+                        {item.badge}
+                      </Badge>
+                    )}
                   </Link>
                 )
               })}
