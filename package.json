@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
+    "@next/third-parties": "^15.2.6",
     "@radix-ui/react-select": "2.1.4",
     "autoprefixer": "^10.4.20",
     "class-variance-authority": "^0.7.1",
