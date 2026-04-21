@@ -315,3 +315,9 @@
   - Category: threat-intelligence
   - Tags: threat-intelligence
   - Free: true
+
+- **IRWatch** - https://irwatch.org
+  - Description: Free live Iran conflict intelligence dashboard with AI-categorized OSINT feeds from 26+ sources, interactive military mapping, Strait of Hormuz monitoring, and prediction market signals
+  - Category: threat-intelligence
+  - Tags: osint, threat-intelligence, iran, conflict-monitoring, geopolitics, military, mapping
+  - Free: true
