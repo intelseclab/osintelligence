@@ -1530,3 +1530,9 @@
   - Category: social-media-intelligence
   - Tags: social-media-intelligence
   - Free: true
+
+- **OSINT Cabal** - https://osintcabal.org
+  - Description: Community OSINT platform focused on SOCMINT with 50+ free hosted Python tools that return results in a graphical interface — no local install required. Also provides free guides, curated tool lists, and investigative resources for open source intelligence practitioners.
+  - Category: social-media-intelligence
+  - Tags: socmint, osint, python, gui, community
+  - Free: true
