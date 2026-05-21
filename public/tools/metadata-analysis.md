@@ -3,7 +3,12 @@
 </div>
 
 ## Metadata
-
+- **Exif Editor** - https://exifeditor.io
+  - Description: Leading web-based EXIF viewer, editor and obfuscator
+  - Category: metadata
+  - Tags: exif, metadata, analysis
+  - Free: true
+ 
 - **ExifTool** - https://exiftool.org
   - Description: Platform-independent library and application for reading metadata
   - Category: metadata
