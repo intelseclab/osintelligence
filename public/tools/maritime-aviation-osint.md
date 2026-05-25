@@ -28,6 +28,12 @@
   - Tags: aviation, flight-data, tracking
   - Free: true
 
+- **Phantom Tide** - https://phantom.labs.jamessawyer.co.uk
+  - Description: Public monitoring map for restricted airspace, maritime activity, and incidents
+  - Category: maritime-aviation
+  - Tags: airspace, maritime, monitoring
+  - Free: true
+
 - **PlaneFinder** - https://planefinder.net
   - Description: Live flight tracking service
   - Category: maritime-aviation
