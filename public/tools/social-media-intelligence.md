@@ -23,6 +23,12 @@
   - Tags: twitter, scraping, python
   - Free: true
 
+- **Xquik** - https://docs.xquik.com
+  - Description: X automation platform for tweet search, profile exports, media downloads, monitoring, and confirmation-gated posting workflows.
+  - Category: social-media
+  - Tags: x, twitter, scraping, monitoring
+  - Free: false
+
 - **IntelTechniques Social Media Tools** - https://inteltechniques.com/tools/
   - Description: Collection of social media investigation tools
   - Category: social-media
