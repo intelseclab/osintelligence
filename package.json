@@ -9,9 +9,9 @@
     "start": "next start",
     "sync-readme": "node scripts/sync-readme.js",
     "watch-readme": "node scripts/watch-readme.js",
-    "build:cloudflare": "opennextjs-cloudflare build",
-    "preview:cloudflare": "opennextjs-cloudflare build && wrangler pages dev",
-    "deploy:cloudflare": "opennextjs-cloudflare build && wrangler pages deploy"
+    "build:cloudflare": "opennextjs-cloudflare build && cp -r .open-next/cloudflare .open-next/middleware .open-next/server-functions .open-next/.build .open-next/assets/ && cp .open-next/worker.js .open-next/assets/_worker.js",
+    "preview:cloudflare": "npm run build:cloudflare && wrangler dev --port 8789",
+    "deploy:cloudflare": "npm run build:cloudflare && wrangler pages deploy --commit-dirty=true"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
