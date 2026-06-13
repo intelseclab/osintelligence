@@ -1,8 +1,4 @@
 name = "osintelligence"
-main = ".open-next/worker.js"
+pages_build_output_dir = ".open-next/assets"
 compatibility_date = "2024-09-23"
 compatibility_flags = ["nodejs_compat"]
-
-[assets]
-directory = ".open-next/assets"
-binding = "ASSETS"
