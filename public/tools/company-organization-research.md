@@ -39,3 +39,9 @@
   - Category: company-research
   - Tags: sec, filings, financial
   - Free: true
+
+- **DataCheck Israel** - https://en.datacheck.co.il/OSINT
+  - Description: Free starting point for researching Israeli companies, people, court records and public-source connections, with source context for due-diligence work
+  - Category: company-research
+  - Tags: israel, companies, public-records, due-diligence, osint
+  - Free: true
