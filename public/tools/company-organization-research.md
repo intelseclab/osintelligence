@@ -45,3 +45,9 @@
   - Category: company-research
   - Tags: israel, companies, public-records, due-diligence, osint
   - Free: true
+
+- **Currawong USCI Checker** - https://currawongweb.com/verify/china-usci-checker/
+  - Description: Checks the format and check digit of China's 18-character Unified Social Credit Code before registry research. It does not establish that a company exists or is active.
+  - Category: company-research
+  - Tags: china, companies, usci, identifiers, data-quality
+  - Free: true
