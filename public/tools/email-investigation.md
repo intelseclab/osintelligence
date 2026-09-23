@@ -189,3 +189,9 @@
   - Category: email-investigation
   - Tags: email-investigation, protonmail, osint
   - Free: true
+
+- **Opsis** - https://useopsis.com
+  - Description: Finds accounts associated with email addresses or usernames and retrieves available public profile information. Also provides reverse WHOIS lookups and premium document metadata analysis for domains.
+  - Category: email
+  - Tags: email, username, domain, reverse-whois, metadata
+  - Free: false
