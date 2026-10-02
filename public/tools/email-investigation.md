@@ -195,3 +195,9 @@
   - Category: email
   - Tags: email, username, domain, reverse-whois, metadata
   - Free: false
+
+- **CrossTrace** - https://crosstrace.io
+  - Description: Searches an email, phone number, username, or domain across Opsis, OSINT.Industries, Dehashed, Intelligence X, and Leak-Lookup using your own API keys, then merges the results into one view with each value attributed to its source.
+  - Category: email
+  - Tags: email, username, phone, breach, aggregator
+  - Free: true
