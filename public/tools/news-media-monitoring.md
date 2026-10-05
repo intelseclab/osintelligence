@@ -27,3 +27,9 @@
   - Category: news-media
   - Tags: fact-checking, media-bias, analysis
   - Free: true
+
+- **Arcmira: YouTube Transcript Search** - https://arcmira.com/docs
+  - Description: Searches indexed YouTube transcripts for timestamped quotes, speaker appearances and sponsor mentions through API, SDK, CLI and MCP access. Requires an account, with limited free access and paid reads that use credits from your plan, then your on-demand budget.
+  - Category: news-media
+  - Tags: youtube, transcript-search, media-monitoring, speaker-search, sponsorship
+  - Free: true
