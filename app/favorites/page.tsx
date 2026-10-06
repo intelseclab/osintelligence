@@ -157,9 +157,11 @@ export default function FavoritesPage() {
                       </div>
                     </div>
 
-                    <p className="text-sm text-muted-foreground mb-3 line-clamp-2">
-                      {tool.description}
-                    </p>
+                    {tool.description && (
+                      <p className="text-sm text-muted-foreground mb-3 line-clamp-2">
+                        {tool.description}
+                      </p>
+                    )}
 
                     <div className="flex flex-wrap gap-1 mb-3">
                       {tool.tags.slice(0, 3).map((tag) => (

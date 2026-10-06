@@ -197,7 +197,7 @@ export default function ToolDetailClient({ toolId }: ToolDetailClientProps) {
                 <div className="flex items-start justify-between mb-4">
                   <div>
                     <h1 className="text-2xl font-bold text-foreground mb-2">{tool.name}</h1>
-                    <p className="text-muted-foreground">{tool.description}</p>
+                    {tool.description && <p className="text-muted-foreground">{tool.description}</p>}
                   </div>
                 </div>
 
@@ -335,9 +335,11 @@ export default function ToolDetailClient({ toolId }: ToolDetailClientProps) {
                       <h4 className="font-medium text-sm text-foreground mb-1">
                         {relTool.name}
                       </h4>
-                      <p className="text-xs text-muted-foreground line-clamp-2">
-                        {relTool.description}
-                      </p>
+                      {relTool.description && (
+                        <p className="text-xs text-muted-foreground line-clamp-2">
+                          {relTool.description}
+                        </p>
+                      )}
                     </Link>
                   ))}
                 </CardContent>

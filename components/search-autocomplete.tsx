@@ -258,9 +258,11 @@ export function SearchAutocomplete({
                     }`}
                   >
                     <div className="font-medium">{tool.name}</div>
-                    <div className="text-xs text-muted-foreground truncate">
-                      {tool.description}
-                    </div>
+                    {tool.description && (
+                      <div className="text-xs text-muted-foreground truncate">
+                        {tool.description}
+                      </div>
+                    )}
                   </Link>
                 )
               })}

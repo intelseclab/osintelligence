@@ -223,12 +223,12 @@
 
 - **Breach House** - https://breach.house/
   - Description: An Open Crawler about ransomware leaks, traditional breaches, infostealer packeges and leads in dark forums, telegram and dark web
-  - Category: dark-web, telegram, breaches, ransomware
+  - Category: dark-web
   - Tags: dark-web, breach, infostealer, ransomware, leads
   - Free: true
  
 - **Have I Been Ransomed?** - https://haveibeenransom.com/
   - Description: A tool like Have I Been Pwned but focus on Ransomware leaks, you can check if your email have been leaked inside ransomware leaks, also now stealer logs
-  - Category: dark-web, ransomware, stealer
+  - Category: dark-web
   - Tags: dark-web, breach, infostealer, ransomware, leads
   - Free: true
