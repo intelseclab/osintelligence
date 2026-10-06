@@ -16,12 +16,6 @@
   - Tags: username, enumeration, osint
   - Free: true
 
-- **CheckUsernames** - https://checkusernamess.com/
-  - Description: Check username availability on social networks
-  - Category: username-tracking
-  - Tags: username, social-networks, availability
-  - Free: true
-
 - **KnowEm** - https://knowem.com
   - Description: Check username and domain availability
   - Category: username-tracking
