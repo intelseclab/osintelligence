@@ -74,24 +74,20 @@ export function parseMarkdownToTools(markdownContent: string, filename: string =
 
       const [, name, url] = toolMatch
       let description = ""
-      let category = currentCategory
+      // Category headings define the existing catalog routes and tool IDs.
+      const category = currentCategory
       let tags: string[] = []
-      let isFree = true
 
       // Parse the following lines for tool details
       let j = i + 1
-      while (j < lines.length && lines[j].trim().startsWith("  - ")) {
+      while (j < lines.length && /^\s+- (?:Description|Category|Tags|Free):/.test(lines[j])) {
         const detailLine = lines[j].trim()
 
-        if (detailLine.startsWith("  - Description:")) {
-          description = detailLine.replace("  - Description:", "").trim()
-        } else if (detailLine.startsWith("  - Category:")) {
-          category = detailLine.replace("  - Category:", "").trim()
-        } else if (detailLine.startsWith("  - Tags:")) {
-          const tagString = detailLine.replace("  - Tags:", "").trim()
+        if (detailLine.startsWith("- Description:")) {
+          description = detailLine.replace("- Description:", "").trim()
+        } else if (detailLine.startsWith("- Tags:")) {
+          const tagString = detailLine.replace("- Tags:", "").trim()
           tags = tagString.split(",").map((tag) => tag.trim())
-        } else if (detailLine.startsWith("  - Free:")) {
-          isFree = detailLine.replace("  - Free:", "").trim() === "true"
         }
         j++
       }
