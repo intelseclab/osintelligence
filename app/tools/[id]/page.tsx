@@ -1,16 +1,12 @@
 import type { Metadata } from "next"
+import { getToolMetadata } from "@/lib/tool-metadata"
 import ToolDetailClient from "./ToolDetailClient"
 
 export async function generateMetadata({
   params,
 }: { params: Promise<{ id: string }> }): Promise<Metadata> {
   const { id } = await params
-  const toolName = id.split("-").slice(2, -1).join(" ")
-
-  return {
-    title: `${toolName} - OSINT Tool`,
-    description: `Learn about ${toolName}, an OSINT tool for cybersecurity professionals.`,
-  }
+  return getToolMetadata(id)
 }
 
 export default async function ToolDetailPage({
