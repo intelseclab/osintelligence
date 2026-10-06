@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { openGraph, twitter } from "./social-metadata"
 import { parseMarkdownToTools } from "./markdown-parser"
 import searchEngines from "../public/tools/search-engines.md"
 import socialMediaIntelligence from "../public/tools/social-media-intelligence.md"
@@ -62,8 +63,24 @@ export function getToolMetadata(id: string): Metadata {
     }
   }
 
+  const title = `${tool.name} - OSINT Tool`
+  const description = tool.description || `Learn about ${tool.name}, an OSINT tool for cybersecurity professionals.`
+  const url = `/tools/${encodeURIComponent(tool.id)}`
+
   return {
-    title: `${tool.name} - OSINT Tool`,
-    description: tool.description || `Learn about ${tool.name}, an OSINT tool for cybersecurity professionals.`,
+    title,
+    description,
+    alternates: { canonical: url },
+    openGraph: {
+      ...openGraph,
+      title,
+      description,
+      url,
+    },
+    twitter: {
+      ...twitter,
+      title,
+      description,
+    },
   }
 }
