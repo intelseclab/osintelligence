@@ -6,6 +6,8 @@
     "build": "next build",
     "dev": "next dev",
     "lint": "next lint",
+    "validate": "node scripts/validate-catalog.js",
+    "validate:links": "node scripts/validate-links.js",
     "start": "next start",
     "sync-readme": "node scripts/sync-readme.js",
     "watch-readme": "node scripts/watch-readme.js",

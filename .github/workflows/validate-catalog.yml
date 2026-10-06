@@ -1,0 +1,101 @@
+name: Validate catalog
+
+# Implements the "Automated Checks" promised in CONTRIBUTING.md:
+#   - format compliance
+#   - duplicate detection
+#   - link validation
+#
+# Pull requests run the fast offline checks over everything, then check links
+# only in the catalog files they touched. A weekly job sweeps every link, since
+# entries rot long after the PR that added them.
+
+on:
+  pull_request:
+    paths:
+      - 'public/tools/**.md'
+      - 'README.md'
+      - 'public/README.md'
+      - 'lib/markdown-parser.ts'
+      - 'lib/category-config.ts'
+      - 'scripts/validate-*.js'
+      - '.github/workflows/validate-catalog.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'public/tools/**.md'
+      - 'README.md'
+      - 'public/README.md'
+      - 'lib/markdown-parser.ts'
+      - 'lib/category-config.ts'
+  schedule:
+    # Mondays 06:00 UTC — full link sweep.
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: validate-catalog-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  format-and-duplicates:
+    name: Format + duplicates + sync
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # No dependencies needed — the validator is plain Node, so skip npm ci.
+      - name: Validate catalog
+        run: node scripts/validate-catalog.js
+
+  links-changed:
+    name: Link check (changed files)
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Collect changed catalog files
+        id: changed
+        run: |
+          base="${{ github.event.pull_request.base.sha }}"
+          head="${{ github.event.pull_request.head.sha }}"
+          files=$(git diff --name-only --diff-filter=d "$base" "$head" -- 'public/tools/*.md' | tr '\n' ' ')
+          echo "files=$files" >> "$GITHUB_OUTPUT"
+          if [ -z "$files" ]; then
+            echo "No catalog files changed."
+          else
+            echo "Changed: $files"
+          fi
+
+      - name: Check links in changed files
+        if: steps.changed.outputs.files != ''
+        run: node scripts/validate-links.js ${{ steps.changed.outputs.files }}
+
+  links-full:
+    name: Link check (full sweep)
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    # ~950 URLs; most of the wall time is waiting on slow hosts.
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Check every catalog link
+        run: node scripts/validate-links.js --concurrency 16 --timeout 20000
