@@ -248,6 +248,35 @@ function main() {
   compare('public/README.md category list', 'public/README.md', pubLinks)
   compare('toolFiles[] in lib/markdown-parser.ts', 'lib/markdown-parser.ts', parserSlugs)
 
+  // lib/tool-metadata.ts bundles the catalog at build time for generateMetadata.
+  // Static imports are what make webpack's asset/source bundling work, so the
+  // list cannot be a glob — which means it is two more hand-maintained copies
+  // (the import statements and the catalogFiles array) that must not drift.
+  // Absent until that module exists, so this is a no-op before then.
+  const metaPath = 'lib/tool-metadata.ts'
+  if (fs.existsSync(path.join(ROOT, metaPath))) {
+    const metaSrc = fs.readFileSync(path.join(ROOT, metaPath), 'utf8')
+    const imported = [...metaSrc.matchAll(/from\s+"[^"]*public\/tools\/([a-z0-9-]+)\.md"/g)].map((m) => m[1]).sort()
+    const listed = [...metaSrc.matchAll(/\[\s*"([a-z0-9-]+)\.md"\s*,/g)].map((m) => m[1]).sort()
+
+    compare(`catalog imports in ${metaPath}`, metaPath, imported.length ? imported : null)
+    compare(`catalogFiles[] in ${metaPath}`, metaPath, listed.length ? listed : null)
+
+    // The two lists inside the file must also agree with each other: an import
+    // that never reaches catalogFiles is dead, and an entry whose import is
+    // missing is a build error rather than a silent gap.
+    for (const s of imported) {
+      if (!listed.includes(s)) {
+        add('SYNC', metaPath, 1, `"${s}.md" is imported but never added to catalogFiles[] — its tools get no metadata`, `meta-import-unused-${s}`)
+      }
+    }
+    for (const s of listed) {
+      if (!imported.includes(s)) {
+        add('SYNC', metaPath, 1, `catalogFiles[] lists "${s}.md" but nothing imports it`, `meta-list-unimported-${s}`)
+      }
+    }
+  }
+
   // The config is keyed by the id derived from each file's "## " header, not by
   // the filename — that is what getCategoryConfig() looks up at runtime, and it
   // is the only category value that actually reaches the UI.
