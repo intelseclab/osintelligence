@@ -28,3 +28,5 @@ package-lock.json
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+# graphify knowledge graph output
+graphify-out/
