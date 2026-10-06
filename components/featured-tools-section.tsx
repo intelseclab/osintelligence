@@ -47,7 +47,9 @@ export function FeaturedToolsSection() {
                           {tool.name}
                         </a>
                       </h3>
-                      <p className="text-muted-foreground text-sm mt-1 line-clamp-2">{tool.description}</p>
+                      {tool.description && (
+                        <p className="text-muted-foreground text-sm mt-1 line-clamp-2">{tool.description}</p>
+                      )}
 
                       <div className="flex items-center gap-3 mt-2">
                         <div className="flex flex-wrap gap-1">

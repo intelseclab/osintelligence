@@ -78,13 +78,20 @@ export function parseMarkdownToTools(markdownContent: string, filename: string =
       const category = currentCategory
       let tags: string[] = []
 
-      // Parse the following lines for tool details
+      // Parse the following lines for tool details.
+      // Detail lines are indented under their entry; match on the raw line so a
+      // following unindented "- **Tool**" entry ends the block instead of being
+      // consumed as a detail of this one.
       let j = i + 1
       while (j < lines.length && /^\s+- (?:Description|Category|Tags|Free):/.test(lines[j])) {
         const detailLine = lines[j].trim()
 
         if (detailLine.startsWith("- Description:")) {
-          description = detailLine.replace("- Description:", "").trim()
+          const value = detailLine.replace("- Description:", "").trim()
+          // Most entries carry the literal placeholder "No description". Treat it
+          // as absent so the UI can omit the paragraph rather than printing the
+          // placeholder; scripts/validate-catalog.js tracks the real gap.
+          description = /^no description\.?$/i.test(value) ? "" : value
         } else if (detailLine.startsWith("- Tags:")) {
           const tagString = detailLine.replace("- Tags:", "").trim()
           tags = tagString.split(",").map((tag) => tag.trim())

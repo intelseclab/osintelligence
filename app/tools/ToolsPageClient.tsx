@@ -656,7 +656,9 @@ export default function ToolsPageClient() {
                       </div>
                     </div>
 
-                    <p className="text-muted-foreground text-sm leading-relaxed mb-2">{tool.description}</p>
+                    {tool.description && (
+                      <p className="text-muted-foreground text-sm leading-relaxed mb-2">{tool.description}</p>
+                    )}
 
                     <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
                       <span className="flex items-center gap-1">

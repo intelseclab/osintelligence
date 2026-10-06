@@ -93,7 +93,9 @@ export default function CategoryPage() {
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
                     <CardTitle className="text-green-400 text-lg">{tool.name}</CardTitle>
-                    <CardDescription className="mt-2">{tool.description}</CardDescription>
+                    {tool.description && (
+                      <CardDescription className="mt-2">{tool.description}</CardDescription>
+                    )}
                   </div>
                   {tool.featured && (
                     <Badge variant="secondary" className="ml-2">

@@ -131,7 +131,7 @@ export default function ComparePage() {
                   </td>
                   {tools.map((tool) => (
                     <td key={tool.id} className="p-4 text-sm text-foreground">
-                      {tool.description}
+                      {tool.description || <span className="text-muted-foreground">—</span>}
                     </td>
                   ))}
                 </tr>
