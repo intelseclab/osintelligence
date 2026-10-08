@@ -16,6 +16,12 @@
   - Tags: world-bank, development, statistics
   - Free: true
 
+- **Voidly Atlas** - https://github.com/voidly-ai/atlas-mcp
+  - Description: Open-source MCP server that gives AI agents internet-censorship data: country status, domain-blocking checks and incidents with links to OONI, Censored Planet and IODA evidence. A hosted read-only endpoint needs no account.
+  - Category: data-statistics
+  - Tags: censorship, internet-measurement, mcp, open-data
+  - Free: true
+
 - **UN Data** - http://data.un.org
   - Description: United Nations statistical databases
   - Category: data-statistics
