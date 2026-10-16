@@ -28,7 +28,6 @@
   - Tags: threat-intelligence, community, ioc
   - Free: true
 
-- **ThreatCrowd** - https://www.threatcrowd.org
   - Description: Search engine for threats and malware research
   - Category: threat-intelligence
   - Tags: threats, malware, research
