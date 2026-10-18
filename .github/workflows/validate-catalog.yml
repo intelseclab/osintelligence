@@ -6,8 +6,8 @@ name: Validate catalog
 #   - link validation
 #
 # Pull requests run the fast offline checks over everything, then check links
-# only in the catalog files they touched. A weekly job sweeps every link, since
-# entries rot long after the PR that added them.
+# only in the catalog entries they touched. A weekly job sweeps every link,
+# since entries rot long after the PR that added them.
 
 on:
   pull_request:
@@ -67,22 +67,33 @@ jobs:
         with:
           node-version: 22
 
-      - name: Collect changed catalog files
+      - name: Collect changed catalog links
         id: changed
         run: |
           base="${{ github.event.pull_request.base.sha }}"
           head="${{ github.event.pull_request.head.sha }}"
-          files=$(git diff --name-only --diff-filter=d "$base" "$head" -- 'public/tools/*.md' | tr '\n' ' ')
-          echo "files=$files" >> "$GITHUB_OUTPUT"
-          if [ -z "$files" ]; then
-            echo "No catalog files changed."
+          entries_file="$RUNNER_TEMP/changed-catalog-links.md"
+          git diff --unified=0 --diff-filter=d "$base" "$head" -- 'public/tools/*.md' \
+            | awk '
+                /^\+[^+]/ {
+                  line = substr($0, 2)
+                  if (line ~ /^- \*\*.*\*\* - https?:\/\/[^[:space:]]+/) print line
+                }
+              ' > "$entries_file"
+
+          echo "entries_file=$entries_file" >> "$GITHUB_OUTPUT"
+          if [ -s "$entries_file" ]; then
+            echo "has_entries=true" >> "$GITHUB_OUTPUT"
+            echo "Changed catalog entries:"
+            cat "$entries_file"
           else
-            echo "Changed: $files"
+            echo "has_entries=false" >> "$GITHUB_OUTPUT"
+            echo "No new or modified catalog links found."
           fi
 
       - name: Check links in changed files
-        if: steps.changed.outputs.files != ''
-        run: node scripts/validate-links.js ${{ steps.changed.outputs.files }}
+        if: steps.changed.outputs.has_entries == 'true'
+        run: node scripts/validate-links.js ${{ steps.changed.outputs.entries_file }}
 
   links-full:
     name: Link check (full sweep)
