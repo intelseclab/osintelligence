@@ -995,10 +995,10 @@
   - Tags: social-media-intelligence, search
   - Free: true
 
-- **Instagram analyzer and viewer** - https://gramho.com/
-  - Description: No description
+- **IGDataHub** - https://igdatahub.com/
+  - Description: Follower history for public Instagram accounts it tracks: free report pages chart follower growth over time with engagement, plus a weekly ranking of the fastest-growing accounts.
   - Category: social-media-intelligence
-  - Tags: social-media-intelligence, analysis
+  - Tags: social-media-intelligence, instagram, analytics
   - Free: true
 
 - **Find Instagram User ID** - https://codeofaninja.com/tools/find-instagram-user-id/
