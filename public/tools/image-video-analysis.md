@@ -244,12 +244,6 @@
   - Tags: image--video-analysis
   - Free: true
 
-- **facesaerch** - http://www.facesaerch.com/
-  - Description: No description
-  - Category: image--video-analysis
-  - Tags: image--video-analysis
-  - Free: true
-
 - **WhatTheFont** - https://www.myfonts.com/WhatTheFont/
   - Description: No description
   - Category: image--video-analysis
@@ -263,12 +257,6 @@
   - Free: true
 
 - **Pixabay** - https://pixabay.com/images/search/
-  - Description: No description
-  - Category: image--video-analysis
-  - Tags: image--video-analysis
-  - Free: true
-
-- **tidder.xyz** - http://tidder.xyz/
   - Description: No description
   - Category: image--video-analysis
   - Tags: image--video-analysis
