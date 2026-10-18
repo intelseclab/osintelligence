@@ -21,3 +21,9 @@
   - Category: username-tracking
   - Tags: username, domain, branding
   - Free: true
+
+- **WhatsMyName Apps** - https://whatsmynameapps.us/
+  - Description: Browser-based username search across public websites and social platforms
+  - Category: username-tracking
+  - Tags: username, public-profiles, osint, search
+  - Free: true
