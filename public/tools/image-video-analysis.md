@@ -285,3 +285,9 @@
   - Category: image--video-analysis
   - Tags: image--video-analysis
   - Free: true
+
+- **Sealed Rose** - https://sealedrose.com/verify-video
+  - Description: Multimodal AI deepfake video, synthetic image, and voice clone forensic detection tool with C2PA and EXIF analysis.
+  - Category: image--video-analysis
+  - Tags: deepfake-detection, image-forensics, video-verification, exif, osint
+  - Free: true
