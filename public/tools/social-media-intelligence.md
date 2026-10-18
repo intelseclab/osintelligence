@@ -299,12 +299,6 @@
   - Tags: social-media-intelligence
   - Free: true
 
-- **TweetBeaver** - https://tweetbeaver.com/
-  - Description: No description
-  - Category: social-media-intelligence
-  - Tags: social-media-intelligence
-  - Free: true
-
 - **Twitter search tool** - https://www.aware-online.com/en/osint-tools/twitter-search-tool/
   - Description: No description
   - Category: social-media-intelligence
@@ -327,12 +321,6 @@
   - Description: No description
   - Category: social-media-intelligence
   - Tags: social-media-intelligence, search
-  - Free: true
-
-- **The one million tweet map** - https://onemilliontweetmap.com
-  - Description: No description
-  - Category: social-media-intelligence
-  - Tags: social-media-intelligence, geo
   - Free: true
 
 - **Tweet Binder** - https://www.tweetbinder.com/
@@ -363,12 +351,6 @@
   - Description: No description
   - Category: social-media-intelligence
   - Tags: social-media-intelligence, search
-  - Free: true
-
-- **Find Twitter Followers** - http://searchfortweets1.com/
-  - Description: No description
-  - Category: social-media-intelligence
-  - Tags: social-media-intelligence
   - Free: true
 
 - **Getdewey.co** - https://getdewey.co/
