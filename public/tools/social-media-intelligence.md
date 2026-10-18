@@ -1205,6 +1205,12 @@
   - Tags: social-media-intelligence, geo
   - Free: true
 
+- **SnapDataHub** - https://snapdatahub.com/
+  - Description: Subscriber counts and growth for public Snapchat creators, with a daily list of the fastest-growing creators and weekly rankings by country.
+  - Category: social-media-intelligence
+  - Tags: social-media-intelligence, snapchat, analytics
+  - Free: true
+
 - **Snapdex** - https://snapdex.com/
   - Description: No description
   - Category: social-media-intelligence
