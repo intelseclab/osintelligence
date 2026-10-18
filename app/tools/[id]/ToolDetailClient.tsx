@@ -9,6 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Skeleton } from "@/components/ui/skeleton"
+import type { OSINTTool } from "@/lib/store"
 import { useOSINTStore } from "@/lib/store"
 import { useToolsData } from "@/lib/use-tools-data"
 import { useToast } from "@/components/ui/toast"
@@ -25,9 +26,16 @@ import {
 
 interface ToolDetailClientProps {
   toolId: string
+  /**
+   * Resolved on the server from the same bundled catalog that produces the
+   * page metadata, so the initial HTML renders the real listing instead of
+   * the missing-tool branch. Null means the id genuinely is not in the
+   * catalog. The store takes over once it has parsed the markdown client-side.
+   */
+  initialTool?: OSINTTool | null
 }
 
-export default function ToolDetailClient({ toolId }: ToolDetailClientProps) {
+export default function ToolDetailClient({ toolId, initialTool = null }: ToolDetailClientProps) {
   useToolsData()
   const router = useRouter()
   const { addToast } = useToast()
@@ -45,7 +53,7 @@ export default function ToolDetailClient({ toolId }: ToolDetailClientProps) {
     comparisonList,
   } = useOSINTStore()
 
-  const [tool, setTool] = useState(getToolById(toolId))
+  const [tool, setTool] = useState<OSINTTool | null>(() => initialTool ?? getToolById(toolId) ?? null)
   const [relatedTools, setRelatedTools] = useState<typeof tools>([])
 
   useEffect(() => {
@@ -265,7 +273,7 @@ export default function ToolDetailClient({ toolId }: ToolDetailClientProps) {
                   <div className="flex items-center gap-3 text-sm">
                     <Clock className="h-4 w-4 text-muted-foreground" />
                     <span className="text-muted-foreground">Added:</span>
-                    <span className="text-foreground">
+                    <span className="text-foreground" suppressHydrationWarning>
                       {new Date(tool.addedDate).toLocaleDateString()}
                     </span>
                   </div>

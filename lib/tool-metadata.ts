@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import type { OSINTTool } from "./store"
 import { openGraph, twitter } from "./social-metadata"
 import { parseMarkdownToTools } from "./markdown-parser"
 import searchEngines from "../public/tools/search-engines.md"
@@ -52,6 +53,17 @@ const catalogFiles = [
 const tools = catalogFiles.flatMap(([filename, markdown]) =>
   parseMarkdownToTools(markdown, filename).tools,
 )
+
+/**
+ * Look up a catalog entry by id at build/request time.
+ *
+ * Same bundled catalog `getToolMetadata` uses, so a page's body and its
+ * metadata can never disagree about whether a tool exists. The client store
+ * re-parses the same markdown after hydration and takes over from there.
+ */
+export function getToolById(id: string): OSINTTool | undefined {
+  return tools.find((entry) => entry.id === id)
+}
 
 export function getToolMetadata(id: string): Metadata {
   const tool = tools.find((entry) => entry.id === id)
