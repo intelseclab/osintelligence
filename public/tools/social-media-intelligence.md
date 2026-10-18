@@ -425,6 +425,12 @@
   - Tags: social-media-intelligence
   - Free: true
 
+- **twtData X Trends** - https://twtdata.com/twitter-trends/
+  - Description: X (Twitter) trending topics by country and city, with a dated archive (one page per location and day, best position and hours on the list for recent days).
+  - Category: social-media-intelligence
+  - Tags: social-media-intelligence, twitter, trends
+  - Free: true
+
 - **Twitter Trending Hashtags and Topics** - https://www.trendsmap.com/
   - Description: No description
   - Category: social-media-intelligence
