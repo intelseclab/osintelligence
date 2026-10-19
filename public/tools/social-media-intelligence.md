@@ -1247,17 +1247,11 @@
   - Tags: social-media-intelligence, search
   - Free: true
 
-- **TikTok User Search** - https://vidnice.com/search/
-  - Description: No description
+- **TKMetrics** - https://tkmetrics.com/
+  - Description: TikTok creator data: free profile lookups for any public account, free country pages listing the top 50 tracked creators by followers, and a creator finder that shows typical (median) views. Full search results, contact details and CSV export need a paid plan.
   - Category: social-media-intelligence
-  - Tags: social-media-intelligence, search
-  - Free: true
-
-- **TikTok downloader** - https://tiktokd.com/
-  - Description: No description
-  - Category: social-media-intelligence
-  - Tags: social-media-intelligence
-  - Free: true
+  - Tags: social-media-intelligence, tiktok, analytics
+  - Free: false
 
 - **TikTok hashtag analysis toolset** - https://github.com/bellingcat/tiktok-hashtag-analysis
   - Description: No description
