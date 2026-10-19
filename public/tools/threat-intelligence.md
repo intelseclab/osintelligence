@@ -321,3 +321,9 @@
   - Category: threat-intelligence
   - Tags: osint, threat-intelligence, iran, conflict-monitoring, geopolitics, military, mapping
   - Free: true
+
+- **ICHI – Internet Cyber Health Index** - https://ichi.global
+  - Description: Free, source-transparent daily internet cyber-health barometer aggregating cybersecurity news and telemetry signals from 100+ curated feeds into a single real-time index; provides an RSS alerts feed at https://ichi.global/api/alerts
+  - Category: threat-intelligence
+  - Tags: threat-intelligence, cybersecurity, news-aggregation, rss, daily-index, situational-awareness
+  - Free: true
