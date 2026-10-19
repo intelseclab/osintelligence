@@ -1307,6 +1307,12 @@
   - Tags: social-media-intelligence
   - Free: true
 
+- **OnlyFans Finders** - https://onlyfansfinders.com/
+  - Description: Free OnlyFans profile search by city, category and price; profiles are re-checked against OnlyFans monthly.
+  - Category: social-media-intelligence
+  - Tags: social-media-intelligence, search, onlyfans, people-search
+  - Free: true
+
 - **Search OnlyFans profiles** - https://hubite.com/onlyfans-search/
   - Description: No description
   - Category: social-media-intelligence
