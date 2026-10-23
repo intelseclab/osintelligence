@@ -1001,6 +1001,12 @@
   - Tags: social-media-intelligence, instagram, analytics
   - Free: true
 
+- **PicMany** - https://picmany.com/
+  - Description: Web viewer for public Instagram profiles, posts, reels, stories and highlights; no Instagram account or login is needed. Videos, stories and highlights load directly from Instagram's servers, so Meta sees the viewer's IP address for them, and the site uses Google Analytics and Cloudflare Web Analytics (disclosed at picmany.com/privacy).
+  - Category: social-media-intelligence
+  - Tags: social-media-intelligence, instagram, viewer, no-login
+  - Free: true
+
 - **Find Instagram User ID** - https://codeofaninja.com/tools/find-instagram-user-id/
   - Description: No description
   - Category: social-media-intelligence
@@ -1252,6 +1258,12 @@
   - Category: social-media-intelligence
   - Tags: social-media-intelligence, tiktok, analytics
   - Free: false
+
+- **TTAnon** - https://ttanon.com/
+  - Description: Server-rendered web viewer for public TikTok profiles, videos, photo posts and hashtags, showing view, like, comment, share and save counts and transcripts where TikTok provides them; no TikTok account or login is needed and TikTok's own scripts never load on its pages. Video playback streams from TikTok's CDN, which sees the viewer's IP address, and the site uses Google Analytics and Cloudflare Web Analytics (disclosed at ttanon.com/about).
+  - Category: social-media-intelligence
+  - Tags: social-media-intelligence, tiktok, viewer, no-login, transcripts
+  - Free: true
 
 - **TikTok hashtag analysis toolset** - https://github.com/bellingcat/tiktok-hashtag-analysis
   - Description: No description
