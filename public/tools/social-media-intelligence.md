@@ -1253,6 +1253,12 @@
   - Tags: social-media-intelligence, tiktok, analytics
   - Free: false
 
+- **TTAnon** - https://ttanon.com/
+  - Description: Server-rendered web viewer for public TikTok profiles, videos, photo posts, hashtags and sounds, showing view, like, comment, share and save counts and transcripts where TikTok provides them; no TikTok account or login is needed and TikTok's own scripts never load on its pages. Video playback streams from TikTok's CDN, which sees the viewer's IP address, and the site uses Google Analytics and Cloudflare Web Analytics (disclosed at ttanon.com/about).
+  - Category: social-media-intelligence
+  - Tags: social-media-intelligence, tiktok, viewer, no-login, transcripts
+  - Free: true
+
 - **TikTok hashtag analysis toolset** - https://github.com/bellingcat/tiktok-hashtag-analysis
   - Description: No description
   - Category: social-media-intelligence
