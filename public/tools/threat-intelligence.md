@@ -327,3 +327,9 @@
   - Category: threat-intelligence
   - Tags: threat-intelligence, cybersecurity, news-aggregation, rss, daily-index, situational-awareness
   - Free: true
+
+- **IPQualityScore** - https://www.ipqualityscore.com
+  - Description: IP, email, phone, and URL reputation lookups that flag proxies, VPNs, Tor, bots, disposable emails, and malicious URLs with a fraud risk score
+  - Category: threat-intelligence
+  - Tags: ip-reputation, proxy-detection, vpn-detection, bot-detection, fraud-score
+  - Free: true
