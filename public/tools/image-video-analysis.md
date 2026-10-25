@@ -10,6 +10,12 @@
   - Tags: reverse-search, image, verification
   - Free: true
 
+- **Reverse Image Search Anywhere** - https://reverseimage.app/
+  - Description: Free browser extension that opens Google Lens, Yandex, Bing Visual, and TinEye searches for an image; it can also search images without a usable source URL.
+  - Category: image-video
+  - Tags: reverse-search, image, verification, browser-extension
+  - Free: true
+
 - **Google Images** - https://images.google.com
   - Description: Google's reverse image search
   - Category: image-video
