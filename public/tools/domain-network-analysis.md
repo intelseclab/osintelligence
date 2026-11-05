@@ -46,6 +46,12 @@
   - Tags: dns, ip, intelligence
   - Free: true
 
+- **Profundis** - https://profundis.io/
+  - Description: Find subdomains and related websites through DNS records, shared IPs, certificates and tracking IDs. Free web tier; paid API access.
+  - Category: domain-network
+  - Tags: subdomain, dns, certificates, reconnaissance
+  - Free: true
+
 - **Whois** - https://whois.net
   - Description: Domain registration information lookup
   - Category: domain-network
