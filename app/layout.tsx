@@ -1,16 +1,26 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { DM_Sans } from "next/font/google"
+import localFont from "next/font/local"
 import { GoogleAnalytics } from "@next/third-parties/google"
 import { Providers } from "@/components/providers"
 import { openGraph, twitter } from "@/lib/social-metadata"
 import "./globals.css"
 
-const dmSans = DM_Sans({
-  subsets: ["latin"],
+// Self-hosted rather than next/font/google: the Google loader fetches the
+// stylesheet at build time and derives the file extension with
+// /\.(woff|woff2|eot|ttf|otf)$/.exec(url)[1]. Google varies that stylesheet by
+// User-Agent, and on a build agent that returned a URL the regex did not match,
+// so the build died with "Cannot read properties of null (reading '1')" inside
+// next/font. Shipping the file removes the build-time network dependency.
+//
+// DM Sans v17 is a variable font: this single latin file covers 400-700, which
+// is the same coverage the previous subsets: ["latin"] configuration produced.
+const dmSans = localFont({
+  src: "./fonts/dm-sans-latin.woff2",
+  weight: "400 700",
+  style: "normal",
   display: "swap",
   variable: "--font-dm-sans",
-  weight: ["400", "500", "600", "700"],
 })
 
 export const metadata: Metadata = {
