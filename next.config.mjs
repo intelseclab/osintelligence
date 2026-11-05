@@ -28,7 +28,11 @@ const CSP = [
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob: https://www.googletagmanager.com https://www.google-analytics.com",
   "font-src 'self' data:",
-  "connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://www.googletagmanager.com",
+  // api.github.com: components/hero-section.tsx reads the repository's
+  // contributor count on mount. Anonymous and read-only, but connect-src has
+  // to name it or the request is blocked outright and the hero falls back to
+  // showing zero contributors.
+  "connect-src 'self' https://api.github.com https://www.google-analytics.com https://region1.google-analytics.com https://www.googletagmanager.com",
   "manifest-src 'self'",
   "worker-src 'self' blob:",
   "upgrade-insecure-requests",
