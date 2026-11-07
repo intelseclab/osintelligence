@@ -51,3 +51,9 @@
   - Category: company-research
   - Tags: china, companies, usci, identifiers, data-quality
   - Free: true
+
+- **They Sent It** - https://theysentit.com
+  - Description: Free archive of real marketing emails from 60,000+ brands; look up which platform a company uses and how often they send.
+  - Category: company-research
+  - Tags: marketing, email, brands, competitive-research
+  - Free: true
