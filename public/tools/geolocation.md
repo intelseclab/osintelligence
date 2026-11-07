@@ -142,6 +142,12 @@
   - Tags: geolocation, geo
   - Free: true
 
+- **ARGUS** - https://argus.prototipo.nl
+  - Description: Free, no-login conflict dashboard with a live map (ADS-B flights incl. flagged military aircraft, ships at chokepoints, NASA FIRMS thermal detections, DeepState frontline, NGA navigational warnings, Ukraine air-raid alerts, earthquakes) next to 165 news feeds grouped by viewpoint and 46 live video channels.
+  - Category: geolocation
+  - Tags: conflict-map, ads-b, ais, firms, news-monitoring
+  - Free: true
+
 - **Satellites.pro** - https://satellites.pro/
   - Description: No description
   - Category: geolocation
