@@ -201,3 +201,9 @@
   - Category: email
   - Tags: email, username, phone, breach, aggregator
   - Free: true
+
+- **looot** - https://looot.ai
+  - Description: Pay-per-call API and MCP server for work email and phone lookup, email verification, and company and people enrichment.
+  - Category: email
+  - Tags: email, phone, enrichment, verification, api
+  - Free: false
