@@ -593,3 +593,9 @@ to determine a company's external threat landscape on the internet
   - Category: privacy-security-tools
   - Tags: privacy-security-tools
   - Free: true
+
+- **anon.li** - https://anon.li
+  - Description: Open-source (AGPL-3.0) email aliases that forward to your real inbox, plus end-to-end encrypted file sharing and forms. Free plan available.
+  - Category: privacy-security-tools
+  - Tags: email-alias, email-forwarding, file-sharing, end-to-end-encryption, privacy
+  - Free: true
