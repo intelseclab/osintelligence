@@ -39,3 +39,9 @@
   - Category: finance-intelligence
   - Tags: cryptocurrency, compliance, fraud-detection
   - Free: false
+
+- **FreezeRadar** - https://freezeradar.com
+  - Description: Free USDT/USDC/PAXG wallet blacklist and sanctions checker - screen any address in seconds (founder submission)
+  - Category: finance-intelligence
+  - Tags: cryptocurrency, sanctions, stablecoin
+  - Free: true
