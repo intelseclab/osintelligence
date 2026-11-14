@@ -533,6 +533,6 @@
   - Free: true
 - **cl0q** - https://cl0q.com
   - Description: Open search engine for domain research and OSINT: 54M domains indexed, free API tier, no tracking
-    - Category: domain-network-analysis
-      - Tags: search-engine, domains, osint
-        - Free: true        
+  - Category: domain--network-analysis
+    - Tags: search-engine, domains, osint
+      - Free: true        
