@@ -285,3 +285,9 @@
   - Category: image-video-analysis
   - Tags: deepfake-detection, image-forensics, video-verification, exif, osint
   - Free: true
+
+- **GetYouTubeTranscript** - https://getyoutubetranscript.com/
+  - Description: Extracts the timestamped transcript of a YouTube video, Short or live stream to search it for names or keywords and quote exactly what was said. A few transcripts a day without an account; paid plans for volume and API access.
+  - Category: image-video-analysis
+  - Tags: youtube, video-verification, transcript, osint
+  - Free: true
