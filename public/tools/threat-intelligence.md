@@ -333,3 +333,9 @@
   - Category: threat-intelligence
   - Tags: ip-reputation, proxy-detection, vpn-detection, bot-detection, fraud-score
   - Free: true
+
+- **ScanMalware** - https://scanmalware.com
+  - Description: Analyses a submitted URL in isolated environments and checks what it loads against YARA, antivirus and IDS rules, threat feeds and AI classification of suspicious pages, returning a phishing or malware verdict with the evidence. Public scans are searchable by domain, IP, ASN, JARM or favicon hash, without an account.
+  - Category: threat-intelligence
+  - Tags: url-scanner, phishing, malware, threat-intelligence, osint
+  - Free: true
