@@ -22,8 +22,14 @@
   - Tags: username, domain, branding
   - Free: true
 
-- **WhatsMyName Apps** - https://whatsmynameapps.us/
-  - Description: Browser-based username search across public websites and social platforms
+- **FreeUsername** - https://freeusername.com
+  - Description: Free username search across 3,450+ sites with no sign-up. Results export to JSON or CSV. Formerly WhatsMyName Apps.
   - Category: username-tracking
-  - Tags: username, public-profiles, osint, search
+  - Tags: username-search, username-lookup, reverse-username-search, osint
+  - Free: true
+
+- **FreeUsername Android App** - https://play.google.com/store/apps/details?id=whatsmyname.app.us
+  - Description: Android app that checks a username across 3,150+ sites and suggests available handles.
+  - Category: username-tracking
+  - Tags: username-checker, username-availability, android-app, osint
   - Free: true
