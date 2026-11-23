@@ -45,3 +45,9 @@
   - Category: finance-intelligence
   - Tags: cryptocurrency, sanctions, stablecoin
   - Free: true
+
+- **US Congress Financial Disclosures and Stock Trades** - https://apify.com/johnvc/us-congress-financial-disclosures-and-stock-trading-data
+  - Description: Search US House and Senate periodic transaction reports by member, ticker or date and export each disclosed trade as JSON or CSV (paid per result on Apify)
+  - Category: finance-intelligence
+  - Tags: congress, stock-trades, financial-disclosures
+  - Free: false
