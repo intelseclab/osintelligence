@@ -515,6 +515,12 @@
   - Tags: social-media-intelligence, geo, search
   - Free: true
 
+- **YouTube Transcript API** - https://apify.com/johnvc/youtubetranscripts
+  - Description: Pulls timestamped transcripts and subtitles for up to 100 YouTube videos or Shorts per run, or for a channel's recent uploads, as JSON or CSV, so you can search what was said across many videos (paid per video on Apify)
+  - Category: social-media-intelligence
+  - Tags: youtube, transcripts, video, social-media-intelligence
+  - Free: false
+
 - **Youtube Channel Search** - https://asif633.github.io/youtube-channel-search/
   - Description: No description
   - Category: social-media-intelligence
