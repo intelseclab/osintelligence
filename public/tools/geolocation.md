@@ -435,3 +435,9 @@
   - Category: geolocation
   - Tags: geolocation, geo
   - Free: true
+
+- **H1DR4 Public Incident Map** - https://h1dr4.dev/map
+  - Description: Browse reported incidents by location and inspect public case files with source-linked timelines. The linked map is free to browse; some private investigation features are paid.
+  - Category: geolocation
+  - Tags: geolocation, mapping, public-records, investigations
+  - Free: true
