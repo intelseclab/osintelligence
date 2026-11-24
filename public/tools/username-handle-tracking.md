@@ -27,3 +27,9 @@
   - Category: username-tracking
   - Tags: username, public-profiles, osint, search
   - Free: true
+ 
+- **SpiderFoot.tools** - https://spiderfoot.tools/
+  - Description: Browser-based OSINT platform for username searches, email investigations, IP address lookups, and public social media profile discovery across multiple websites.
+  - Category: username-tracking
+  - Tags: username, email, ip-lookup, osint, digital-footprint, social-media
+  - Free: true
