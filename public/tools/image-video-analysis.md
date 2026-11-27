@@ -22,6 +22,12 @@
   - Tags: reverse-search, google, image
   - Free: true
 
+- **Google Lens API** - https://apify.com/johnvc/google-lens-api
+  - Description: Runs Google Lens reverse image searches from an image URL, up to 10 uploaded images, or base64, and returns visual matches (up to about 60) or exact matches (up to 400) with title, source, link and thumbnail as JSON (paid per result on Apify)
+  - Category: image-video
+  - Tags: reverse-search, google, image, verification
+  - Free: false
+
 - **Yandex Images** - https://yandex.com/images
   - Description: Yandex reverse image search engine
   - Category: image-video
